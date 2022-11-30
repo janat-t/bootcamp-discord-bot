@@ -1,0 +1,31 @@
+{
+  "name": "bootcamp-discord-bot",
+  "version": "1.0.0",
+  "description": "Discord Bot for managing meeting in Programming Bootcamp",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "dep-com": "node deploy-commands.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/janat-t/bootcamp-discord-bot.git"
+  },
+  "keywords": [
+    "discord"
+  ],
+  "author": "Taerakul Janat",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/janat-t/bootcamp-discord-bot/issues"
+  },
+  "homepage": "https://github.com/janat-t/bootcamp-discord-bot#readme",
+  "dependencies": {
+    "discord.js": "^14.7.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.28.0",
+    "prettier": "^2.8.0"
+  }
+}
