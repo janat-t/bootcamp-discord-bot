@@ -1,6 +1,7 @@
 const path = require("node:path");
 const fs = require("node:fs");
 const { connection } = require("mongoose");
+const chalk = require("chalk");
 
 module.exports = (client) => {
   client.handleEvents = async () => {
@@ -25,7 +26,7 @@ module.exports = (client) => {
             } else {
               client.on(event.name, (...args) => event.execute(...args));
             }
-            console.log(`loaded event: ${event.name}.`);
+            console.log(chalk.blue(`[Event] ${event.name} has been loaded.`));
           }
           break;
 

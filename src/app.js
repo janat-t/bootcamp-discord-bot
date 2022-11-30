@@ -26,8 +26,8 @@ for (const folder of functionFolders) {
 }
 
 // Log in to Discord with your client's token
-client.handleCommands();
 client.handleEvents();
+client.handleCommands();
 client.login(token);
 (async () => {
   await connect(databaseToken).catch(console.error);
