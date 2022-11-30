@@ -1,11 +1,17 @@
-# Bootcamp Manager Discord Bot
+# Discord Manager Bot
 
 Discord bot that will take care of your team meating schedule on Discord for you!
 
 ## Implemented Commands
-- `/ping`: Self Introduction
+
+- **_Tools_ Catagory**
+  - `/ping`: Ping latency of the API.
+  - `/user`: Provide information about the user that called the command.
+  - `/server`: Provide information about current server.
+  - `/databases`: Store guild information into the database.
 
 ## To be Implemented Features
+
 - Schedule next meeting for each channel, role, team
 - Schedule repeated meeting (weekly, biweekly, monthly)
 - Reschedule meeting
@@ -15,9 +21,10 @@ Discord bot that will take care of your team meating schedule on Discord for you
 
 ## How to Run
 
-\*\*Dont forget to put `token`, `clientId` and `guildId` in `config.json`\*\*
+\*\*Create a file named `config.json` and put `token`, `databaseToken`, `clientId` and `guildId` inside.\*\*
 
 ### First time only
+
 Install node packages by running `npm install` or `npm i`.
 For convinience when developing, also install `nodemon` by running `npm i -g nodemon`
 
