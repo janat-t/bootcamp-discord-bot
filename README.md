@@ -32,3 +32,9 @@ For convinience when developing, also install `nodemon` by running `npm i -g nod
 
 - `npm start`: Run the `app.js`
 - `npm run dep-com`: Register commands to Discord
+
+## Future Idea
+
+- Voice channel features
+- Music play
+- Rubik Scamble
