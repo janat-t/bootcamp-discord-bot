@@ -1,6 +1,6 @@
 # Discord Manager Bot
 
-Discord bot that will take care of your team meating schedule on Discord for you!
+Discord bot that will take care of your team meeting schedule on Discord for you!
 
 ## Implemented Commands
 
