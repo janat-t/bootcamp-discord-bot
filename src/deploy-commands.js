@@ -24,12 +24,20 @@ const rest = new REST({ version: "10" }).setToken(token);
     console.log(
       `Started refreshing ${client.commandArray.length} application (/) commands.`
     );
-
     // The put method is used to fully refresh all commands in the guild with the current set
-    const data = await rest.put(
-      Routes.applicationGuildCommands(clientId, guildId),
-      { body: client.commandArray }
-    );
+    var data;
+    if (guildId) {
+      console.log(`deploying to a guild with id ${guildId}`);
+      data = await rest.put(
+        Routes.applicationGuildCommands(clientId, guildId),
+        { body: client.commandArray }
+      );
+    } else {
+      console.log(`deploying globally`);
+      data = await rest.put(Routes.applicationCommands(clientId), {
+        body: client.commandArray,
+      });
+    }
 
     console.log(
       `Successfully reloaded ${data.length} application (/) commands.`
