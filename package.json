@@ -6,7 +6,9 @@
   "scripts": {
     "test": "node .",
     "start": "nodemon src/app.js",
-    "dep-com": "node src/deploy-commands.js"
+    "dep-com": "node src/deploy-commands.js",
+    "del-com": "node src/delete-commands.js",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",

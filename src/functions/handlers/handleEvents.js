@@ -16,7 +16,7 @@ module.exports = (client) => {
         .filter((file) => file.endsWith(".js"));
 
       switch (folder) {
-        case "client":
+        case "discord":
           for (const file of eventFiles) {
             const filePath = path.join("../../events", folder, file);
             const event = require(filePath);
