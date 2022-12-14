@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-const Guild = require("./schemas/guild");
 const Team = require("./schemas/team");
 
 module.exports = async function run() {
