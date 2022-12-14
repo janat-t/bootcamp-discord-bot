@@ -4,11 +4,14 @@ Discord bot that will take care of your team meeting schedule on Discord for you
 
 ## Implemented Commands
 
-- **_Tools_ Catagory**
+- **_Tools_**
   - `/ping`: Ping latency of the API.
   - `/user`: Provide information about the user that called the command.
   - `/server`: Provide information about current server.
-  - `/databases`: Store guild information into the database.
+  - `/guild`: Store guild information into the database.
+- **_Team_**
+  - `/new_team teamName [channel] [role]`: Create new team on a channel and role (optional)
+  - `/teams [channel]`: List all team on a guild or a channel
 
 ## To be Implemented Features
 
@@ -18,6 +21,8 @@ Discord bot that will take care of your team meeting schedule on Discord for you
 - Send meeting reminder before meeting (1 hr or 30 mins)
 - Tag role/channel/team
 - Answer to when asked for upcoming meeting
+- Send meeting reminder to email
+- Send meeting reminder to calendar
 
 ## How to Run
 
@@ -25,6 +30,7 @@ Discord bot that will take care of your team meeting schedule on Discord for you
 
 ### First time only
 
+Install `MongoDB` locally or create a database on MongoDB Atlas.
 Install node packages by running `npm install` or `npm i`.
 For convinience when developing, also install `nodemon` by running `npm i -g nodemon`
 
