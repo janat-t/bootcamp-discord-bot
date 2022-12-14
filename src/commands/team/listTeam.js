@@ -23,14 +23,19 @@ module.exports = {
     console.log("teams command called");
     const channel = interaction.options.getChannel("channel");
     if (channel) {
-      message += " in `#" + channel.name + "`";
+      message += " in `" + channel.name + "`";
     }
     message += ":\n";
-    const guildId = interaction.guild.id;
+    const guild = interaction.guild;
 
     // Find teams on databases with guildId and channelId (if exists)
     const teams = await Team.find(
-      channel ? { guildId, channelId: channel.id } : { guildId }
+      channel
+        ? {
+            "guild.guildId": guild.id,
+            "channel.channelId": channel.id,
+          }
+        : { "guild.id": guild.id }
     );
     console.log(teams);
     if (teams.length === 0) {

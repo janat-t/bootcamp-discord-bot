@@ -40,18 +40,20 @@ module.exports = {
     if (role) {
       message += "role name: `" + role.name + "`\n";
     }
-    const guildId = interaction.guild.id;
+    const guild = interaction.guild;
 
-    if (await Team.exists({ teamName, guildId })) {
+    if (await Team.exists({ teamName, guild: { guildId: guild.id } })) {
       // Check if team name alraedy exist
       message = "team name alraedy exist";
     } else {
       // Create Team object to be saved
       const team = await Team.create({
         teamName,
-        guildId,
-        channelId: channel ? channel.id : "",
-        roleId: role ? role.id : "",
+        guild: { guildId: guild.id, guildName: guild.name },
+        channel: channel
+          ? { channelId: channel.id, channelName: channel.name }
+          : {},
+        role: role ? { roleId: role.id, roleName: role.name } : {},
       });
       console.log("new teamId: " + team._id);
     }

@@ -7,8 +7,14 @@ const teamSchema = new Schema(
       required: true,
     },
     members: [String], // userId
-    channelId: String,
-    roleId: String,
+    channel: {
+      channelId: String,
+      channelName: String,
+    },
+    role: {
+      roleId: String,
+      roleName: String,
+    },
     parentTeam: {
       type: SchemaTypes.ObjectId,
       ref: "Team",
@@ -19,10 +25,12 @@ const teamSchema = new Schema(
         ref: "Team",
       },
     ],
-    guildId: {
-      type: String,
-      ref: "Guild",
-      required: true,
+    guild: {
+      guildId: {
+        type: String,
+        required: true,
+      },
+      guildName: String,
     },
   },
   {
