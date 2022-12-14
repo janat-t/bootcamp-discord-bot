@@ -1,17 +1,16 @@
-const { Schema, model, SchemaTypes } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const teamSchema = new Schema(
   {
-    _id: SchemaTypes.ObjectId,
     teamName: {
       type: String,
       required: true,
     },
-    guild: { type: SchemaTypes.ObjectId, ref: "Guild" },
-    channel: String,
-    role: String,
+    guildId: { type: String, ref: "Guild", required: true },
+    channelId: String,
+    roleId: String,
   },
   { timestamps: true }
 );
 
-module.exports = new model("Team", teamSchema);
+module.exports = new model("Team", teamSchema, "teams");
