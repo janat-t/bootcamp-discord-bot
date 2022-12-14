@@ -14,6 +14,9 @@ module.exports = async function run() {
     // const team = await Team.where().populate("guild");
     // console.log("teams: ", team[0]);
 
+    // const res = await Team.deleteMany({ subTeams: { $exists: false } });
+    // console.log(res);
+
     console.log("Bot running...");
   } catch (e) {
     console.log(e.message);

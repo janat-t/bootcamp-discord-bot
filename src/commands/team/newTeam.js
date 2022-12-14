@@ -29,7 +29,7 @@ module.exports = {
 
     // Creating log message and reply message.
     let message = "";
-    console.log("team command called");
+    console.log("new_team command called");
     const teamName = interaction.options.getString("team_name");
     message += "team name: `" + teamName + "`\n";
     const channel = interaction.options.getChannel("channel");
@@ -42,8 +42,8 @@ module.exports = {
     }
     const guildId = interaction.guild.id;
 
-    // Check if team name alraedy exist
     if (await Team.exists({ teamName, guildId })) {
+      // Check if team name alraedy exist
       message = "team name alraedy exist";
     } else {
       // Create Team object to be saved
@@ -53,8 +53,7 @@ module.exports = {
         channelId: channel ? channel.id : "",
         roleId: role ? role.id : "",
       });
-
-      // Save the created team into database
+      console.log("new teamId: " + team._id);
     }
 
     // Update reply on discord
