@@ -3,6 +3,7 @@ const path = require("node:path");
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const { token, databaseToken } = require("../config.json");
 const { connect } = require("mongoose");
+const run = require("./run");
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -32,3 +33,5 @@ client.login(token);
 (async () => {
   await connect(databaseToken).catch(console.error);
 })();
+
+run();

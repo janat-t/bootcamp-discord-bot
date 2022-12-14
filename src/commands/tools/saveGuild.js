@@ -1,21 +1,17 @@
 const Guild = require("../../schemas/guild");
 const { SlashCommandBuilder } = require("discord.js");
-const mongoose = require("mongoose");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("guild")
     .setDescription("Returns information from the guild database"),
+
   async execute(interaction) {
-    let curGuild = await Guild.findOne({ guildId: interaction.guild.id });
+    let curGuild = await Guild.findOne({ _id: interaction.guild.id });
     if (!curGuild) {
       curGuild = await new Guild({
-        _id: mongoose.Types.ObjectId(),
-        guildId: interaction.guild.id,
+        _id: interaction.guild.id,
         guildName: interaction.guild.name,
-        guildIcom: interaction.guild.iconURL()
-          ? interaction.guild.iconURL()
-          : "None",
       });
 
       await curGuild.save().catch(console.error);
@@ -25,7 +21,7 @@ module.exports = {
       console.log(curGuild);
     } else {
       await interaction.reply({
-        content: `Server ID: ${curGuild.guildId}`,
+        content: `Server ID: ${curGuild._id}`,
       });
       console.log(curGuild);
     }
