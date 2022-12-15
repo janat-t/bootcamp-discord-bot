@@ -25,7 +25,9 @@
   "homepage": "https://github.com/janat-t/bootcamp-discord-bot#readme",
   "dependencies": {
     "chalk": "^4.1.2",
+    "chrono-node": "^2.4.2",
     "discord.js": "^14.7.0",
+    "moment": "^2.29.4",
     "mongoose": "^6.7.4"
   },
   "devDependencies": {
