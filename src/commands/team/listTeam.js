@@ -1,57 +1,63 @@
-const { SlashCommandBuilder } = require("discord.js");
-const { ChannelType } = require("discord-api-types/v10");
+const { SlashCommandBuilder, ChannelType } = require("discord.js");
 const Team = require("../../schemas/team");
 
-module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("teams")
-    .setDescription("Show existing teams on the server or a channel")
-    .addChannelOption((option) =>
-      option
-        .setName("channel")
-        .setDescription("Set the base channel of the team")
-        .addChannelTypes(ChannelType.GuildText)
-    ),
+/**
+ *  Command Name: teams
+ *  Optional Arguments: channel
+ *  Description:
+ *    List out the teams in the current server.
+ *    If the channel is specified, list out the teams on the channel
+ */
+const data = new SlashCommandBuilder()
+  .setName("teams")
+  .setDescription("Show existing teams on the server or a channel")
+  .addChannelOption((option) =>
+    option
+      .setName("channel")
+      .setDescription("Base channel for teams")
+      .addChannelTypes(ChannelType.GuildText)
+  );
 
-  async execute(interaction) {
-    await interaction.deferReply({
-      ephemeral: true,
-    });
+const execute = async function (interaction) {
+  await interaction.deferReply({
+    ephemeral: false,
+  });
 
-    // Creating log message and reply message.
-    let message = "Teams on this server";
-    console.log("teams command called");
-    const channel = interaction.options.getChannel("channel");
-    if (channel) {
-      message += " in `" + channel.name + "`";
-    }
-    message += ":\n";
-    const guild = interaction.guild;
+  // Creating log message and reply message.
+  let message = "Teams on this server";
+  console.log("teams command called");
+  const channel = interaction.options.getChannel("channel");
+  if (channel) {
+    message += ` in \`${channel.name}\``;
+  }
+  message += ":\n";
+  const guild = interaction.guild;
 
-    // Find teams on databases with guildId and channelId (if exists)
-    const teams = await Team.find(
-      channel
-        ? {
-            "guild.guildId": guild.id,
-            "channel.channelId": channel.id,
-          }
-        : { "guild.id": guild.id }
-    );
-    console.log(teams);
-    if (teams.length === 0) {
-      message = "There is no team here.";
-    }
+  // Find teams on databases with guildId and channelId (if exists)
+  const teams = await Team.find(
+    channel
+      ? {
+          "guild.guildId": guild.id,
+          "channel.channelId": channel.id,
+        }
+      : { "guild.guildId": guild.id }
+  );
+  // console.log(teams);
+  if (teams.length === 0) {
+    message = "There is no team here.";
+  }
 
-    teams.map((team) => {
-      message += " - " + team.teamName + "\n";
-    });
+  teams.map((team) => {
+    message += ` - \`${team.teamName}\`\n`;
+  });
 
-    // Update reply on discord
-    console.log(message);
-    await interaction.editReply({
-      fetcheReply: true,
-      ephemeral: true,
-      content: message,
-    });
-  },
+  // Update reply on discord
+  console.log(message);
+  await interaction.editReply({
+    fetcheReply: true,
+    ephemeral: false,
+    content: message,
+  });
 };
+
+module.exports = { data, execute };

@@ -1,5 +1,16 @@
 const { Schema, model, SchemaTypes } = require("mongoose");
 
+const meetingSchema = new Schema({
+  title: {
+    type: String,
+    require: true,
+  },
+  date: {
+    type: Date,
+    require: true,
+  },
+});
+
 const teamSchema = new Schema(
   {
     teamName: {
@@ -7,6 +18,7 @@ const teamSchema = new Schema(
       required: true,
     },
     members: [String], // userId
+    meetings: [meetingSchema],
     channel: {
       channelId: String,
       channelName: String,
@@ -30,7 +42,10 @@ const teamSchema = new Schema(
         type: String,
         required: true,
       },
-      guildName: String,
+      guildName: {
+        type: String,
+        required: true,
+      },
     },
   },
   {
@@ -44,6 +59,14 @@ teamSchema.virtual("teamId").get(function () {
 
 teamSchema.statics.findId = function (teamId) {
   return this.findOne({ _id: teamId });
+};
+
+teamSchema.statics.inGuild = function (guildId) {
+  return this.find({ "guild.guildId": guildId });
+};
+
+teamSchema.statics.findNameInGuild = function (teamName, guildId) {
+  return this.findOne({ "guild.guildId": guildId, teamName });
 };
 
 module.exports = new model("Team", teamSchema, "teams");
