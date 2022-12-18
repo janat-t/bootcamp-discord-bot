@@ -1,4 +1,4 @@
-const { Events } = require("discord.js");
+const { Events } = require('discord.js');
 
 module.exports = {
   name: Events.ClientReady,
@@ -10,7 +10,7 @@ module.exports = {
 
     // const channels = await client.channels.cache;
     // channels.map((c) => console.log(`${c.guild.name}:${c.name} ${c.type}`));
-    console.log("Connected to guilds:");
-    guilds.map((g) => console.log("-", g.name));
+    console.log('Connected to guilds:');
+    guilds.map(g => console.log('-', g.name));
   },
 };

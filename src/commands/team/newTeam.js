@@ -1,6 +1,5 @@
-const { SlashCommandBuilder } = require("discord.js");
-const { ChannelType } = require("discord-api-types/v10");
-const Team = require("../../schemas/team");
+const { SlashCommandBuilder, ChannelType } = require('discord.js');
+const Team = require('../../schemas/team');
 
 /**
  *  Command Name: new_team
@@ -11,22 +10,22 @@ const Team = require("../../schemas/team");
  *    If the channel and role is specified, save them to the team.
  */
 const data = new SlashCommandBuilder()
-  .setName("new_team")
-  .setDescription("Create team in a text channel")
-  .addStringOption((option) =>
+  .setName('new_team')
+  .setDescription('Create team in a text channel')
+  .addStringOption(option =>
     option
-      .setName("team_name")
-      .setDescription("Set the team name")
+      .setName('team_name')
+      .setDescription('Set the team name')
       .setRequired(true)
   )
-  .addChannelOption((option) =>
+  .addChannelOption(option =>
     option
-      .setName("channel")
-      .setDescription("Set the base channel of the team")
+      .setName('channel')
+      .setDescription('Set the base channel of the team')
       .addChannelTypes(ChannelType.GuildText)
   )
-  .addRoleOption((option) =>
-    option.setName("role").setDescription("Set the role of the team")
+  .addRoleOption(option =>
+    option.setName('role').setDescription('Set the role of the team')
   );
 
 const execute = async function (interaction) {
@@ -35,22 +34,22 @@ const execute = async function (interaction) {
   });
 
   // Creating log message and reply message.
-  let message = "";
-  console.log("new_team command called");
-  const teamName = interaction.options.getString("team_name");
+  let message = '';
+  console.log('new_team command called');
+  const teamName = interaction.options.getString('team_name');
   message += `Team name: \`${teamName}\`\n`;
-  const channel = interaction.options.getChannel("channel");
+  const channel = interaction.options.getChannel('channel');
   if (channel) {
     message += `Channel name: \`#${channel.name}\`\n`;
   }
-  const role = interaction.options.getRole("role");
+  const role = interaction.options.getRole('role');
   if (role) {
     message += `Role name: \`${role.name}\`\n`;
   }
-  const guild = interaction.guild;
+  const { guild } = interaction;
 
   // Check if team name alraedy exist
-  if (await Team.exists({ teamName, "guild.id": guild.id })) {
+  if (await Team.exists({ teamName, 'guild.id': guild.id })) {
     message = `Team named \`${teamName}\` alraedy exist on this server.`;
   }
   // Create Team object to be saved
