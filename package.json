@@ -3,22 +3,22 @@
   "version": "1.0.0",
   "description": "Discord Bot for managing meeting in Programming Bootcamp",
   "main": "src/app.js",
-  "scripts": {
-    "test": "node .",
-    "start": "nodemon src/app.js",
-    "dep-com": "node src/deploy-commands.js",
-    "del-com": "node src/delete-commands.js",
-    "lint": "eslint ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/janat-t/bootcamp-discord-bot.git"
-  },
   "keywords": [
     "discord"
   ],
   "author": "Taerakul Janat",
   "license": "MIT",
+  "scripts": {
+    "test": "node .",
+    "start": "nodemon src/app.js",
+    "dep-com": "node src/deploy-commands.js",
+    "del-com": "node src/delete-commands.js",
+    "lint": "lint-staged"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/janat-t/bootcamp-discord-bot.git"
+  },
   "bugs": {
     "url": "https://github.com/janat-t/bootcamp-discord-bot/issues"
   },
@@ -31,7 +31,22 @@
     "mongoose": "^6.7.4"
   },
   "devDependencies": {
-    "eslint": "^8.28.0",
-    "prettier": "^2.8.0"
+    "eslint": "^8.30.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**": "eslint --fix"
   }
 }
