@@ -10,10 +10,12 @@
   "license": "MIT",
   "scripts": {
     "test": "node .",
+    "prestart": "npm install",
     "start": "nodemon src/app.js",
     "dep-com": "node src/deploy-commands.js",
     "del-com": "node src/delete-commands.js",
-    "lint": "lint-staged"
+    "lint": "lint-staged",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -41,15 +43,7 @@
     "lint-staged": "^13.1.0",
     "prettier": "^2.8.1"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
-    "src/**": [
-      "prettier --write",
-      "eslint --fix"
-    ]
+    "src/**": "eslint --fix"
   }
 }
