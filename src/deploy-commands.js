@@ -4,19 +4,19 @@ const {
   Client,
   GatewayIntentBits,
   Collection,
-} = require("discord.js");
-const { clientId, guildId, token } = require("../config.json");
+} = require('discord.js');
+const { clientId, guildId, token } = require('../config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
 client.commandArray = [];
 
-require("./functions/handlers/handleCommands")(client);
+require('./functions/handlers/handleCommands')(client);
 
 client.handleCommands();
 
 // Construct and prepare an instance of the REST module
-const rest = new REST({ version: "10" }).setToken(token);
+const rest = new REST({ version: '10' }).setToken(token);
 
 // and deploy your commands!
 (async () => {
@@ -25,7 +25,7 @@ const rest = new REST({ version: "10" }).setToken(token);
       `Started refreshing ${client.commandArray.length} application (/) commands.`
     );
     // The put method is used to fully refresh all commands in the guild with the current set
-    var data;
+    let data;
     if (guildId) {
       console.log(`deploying to a guild with id ${guildId}`);
       data = await rest.put(

@@ -1,24 +1,27 @@
-const path = require("node:path");
-const fs = require("node:fs");
-const { connection } = require("mongoose");
-const chalk = require("chalk");
+/* eslint-disable no-param-reassign */
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
+const path = require('node:path');
+const fs = require('node:fs');
+const { connection } = require('mongoose');
+const chalk = require('chalk');
 
-module.exports = (client) => {
+module.exports = client => {
   client.handleEvents = async () => {
-    const eventsPath = "./src/events";
+    const eventsPath = './src/events';
     const eventFolders = fs
       .readdirSync(eventsPath)
-      .filter((folder) => !folder.startsWith("."));
+      .filter(folder => !folder.startsWith('.'));
 
     for (const folder of eventFolders) {
       const eventFiles = fs
         .readdirSync(path.join(eventsPath, folder))
-        .filter((file) => file.endsWith(".js"));
+        .filter(file => file.endsWith('.js'));
 
       switch (folder) {
-        case "discord":
+        case 'discord':
           for (const file of eventFiles) {
-            const filePath = path.join("../../events", folder, file);
+            const filePath = path.join('../../events', folder, file);
             const event = require(filePath);
 
             if (event.once) {
@@ -30,9 +33,9 @@ module.exports = (client) => {
           }
           break;
 
-        case "mongo":
+        case 'mongo':
           for (const file of eventFiles) {
-            const filePath = path.join("../../events", folder, file);
+            const filePath = path.join('../../events', folder, file);
             const event = require(filePath);
 
             if (event.once)

@@ -1,7 +1,7 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
-  data: new SlashCommandBuilder().setName("ping").setDescription("Return ping"),
+  data: new SlashCommandBuilder().setName('ping').setDescription('Return ping'),
   async execute(interaction) {
     const message = await interaction.deferReply({
       fetchReply: true,

@@ -1,4 +1,4 @@
-const { Schema, model, SchemaTypes } = require("mongoose");
+const { Schema, model, SchemaTypes } = require('mongoose');
 
 const meetingSchema = new Schema({
   title: {
@@ -29,12 +29,12 @@ const teamSchema = new Schema(
     },
     parentTeam: {
       type: SchemaTypes.ObjectId,
-      ref: "Team",
+      ref: 'Team',
     },
     subTeams: [
       {
         type: SchemaTypes.ObjectId,
-        ref: "Team",
+        ref: 'Team',
       },
     ],
     guild: {
@@ -53,7 +53,7 @@ const teamSchema = new Schema(
   }
 );
 
-teamSchema.virtual("teamId").get(function () {
+teamSchema.virtual('teamId').get(function () {
   return this._id;
 });
 
@@ -62,11 +62,12 @@ teamSchema.statics.findId = function (teamId) {
 };
 
 teamSchema.statics.inGuild = function (guildId) {
-  return this.find({ "guild.guildId": guildId });
+  return this.find({ 'guild.guildId': guildId });
 };
 
 teamSchema.statics.findNameInGuild = function (teamName, guildId) {
-  return this.findOne({ "guild.guildId": guildId, teamName });
+  return this.findOne({ 'guild.guildId': guildId, teamName });
 };
 
-module.exports = new model("Team", teamSchema, "teams");
+// eslint-disable-next-line new-cap
+module.exports = new model('Team', teamSchema, 'teams');

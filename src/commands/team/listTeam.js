@@ -1,5 +1,5 @@
-const { SlashCommandBuilder, ChannelType } = require("discord.js");
-const Team = require("../../schemas/team");
+const { SlashCommandBuilder, ChannelType } = require('discord.js');
+const Team = require('../../schemas/team');
 
 /**
  *  Command Name: teams
@@ -9,12 +9,12 @@ const Team = require("../../schemas/team");
  *    If the channel is specified, list out the teams on the channel
  */
 const data = new SlashCommandBuilder()
-  .setName("teams")
-  .setDescription("Show existing teams on the server or a channel")
-  .addChannelOption((option) =>
+  .setName('teams')
+  .setDescription('Show existing teams on the server or a channel')
+  .addChannelOption(option =>
     option
-      .setName("channel")
-      .setDescription("Base channel for teams")
+      .setName('channel')
+      .setDescription('Base channel for teams')
       .addChannelTypes(ChannelType.GuildText)
   );
 
@@ -24,31 +24,33 @@ const execute = async function (interaction) {
   });
 
   // Creating log message and reply message.
-  let message = "Teams on this server";
-  console.log("teams command called");
-  const channel = interaction.options.getChannel("channel");
+  let message = 'Teams on this server';
+  console.log('teams command called');
+  const channel = interaction.options.getChannel('channel');
   if (channel) {
     message += ` in \`${channel.name}\``;
   }
-  message += ":\n";
-  const guild = interaction.guild;
+  message += ':\n';
+  const { guild } = interaction;
 
   // Find teams on databases with guildId and channelId (if exists)
   const teams = await Team.find(
     channel
       ? {
-          "guild.guildId": guild.id,
-          "channel.channelId": channel.id,
+          'guild.guildId': guild.id,
+          'channel.channelId': channel.id,
         }
-      : { "guild.guildId": guild.id }
+      : { 'guild.guildId': guild.id }
   );
   // console.log(teams);
   if (teams.length === 0) {
-    message = "There is no team here.";
+    message = 'There is no team here.';
   }
 
-  teams.map((team) => {
-    message += ` - \`${team.teamName}\`\n`;
+  teams.map(team => {
+    const line = ` - \`${team.teamName}\`\n`;
+    message += line;
+    return line;
   });
 
   // Update reply on discord

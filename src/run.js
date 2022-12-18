@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-const Team = require("./schemas/team");
+const Team = require('./schemas/team');
 
 module.exports = async function run() {
   try {
@@ -16,7 +16,7 @@ module.exports = async function run() {
     // const res = await Team.deleteMany({ subTeams: { $exists: false } });
     // console.log(res);
 
-    console.log("Bot running...");
+    console.log('Bot running...');
   } catch (e) {
     console.log(e.message);
   }
