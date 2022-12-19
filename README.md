@@ -11,8 +11,6 @@ Discord bot that will take care of your team meeting schedule on Discord for you
     - Provide information about the user that called the command
   - `/server`
     - Provide information about current server
-  - `/guild`
-    - Store guild information into the database
 ### Team
   - `/new_team team_name [channel] [role]`
     - Create a new team on a channel and role (optional)
@@ -20,9 +18,9 @@ Discord bot that will take care of your team meeting schedule on Discord for you
     - List all team on current guild or a channel
 ### Meeting
   - `/new_meeting team_name title date_time`
-    - Create a new meeting associated with the team with name `team_name` with title of `title` at the time `date_time`
+    - Create a new meeting associated with the team with name team_name with title and date_time
   - `/meetings [team_name]`
-    - List all meeting on current guild or a team
+    - List all meeting scheduled on current guild or team_name
 
 ## To be Implemented Features
 
@@ -47,7 +45,7 @@ Discord bot that will take care of your team meeting schedule on Discord for you
    }
    ```
 
-2. Install `MongoDB` locally or create a database on MongoDB Atlas. You can install MongoDB easily with docker by running following command
+2. Install `MongoDB` locally or create a database on MongoDB Atlas. You can easily run MongoDB with docker by running following command
    ```
    docker run -dp 27015:27017 --name mymongo mongo:latest
    ```
@@ -57,7 +55,7 @@ Discord bot that will take care of your team meeting schedule on Discord for you
 
 - `npm start`: Run the `app.js`
 - `npm run dep-com`: Register commands to Discord
-- `npm run del-com` : Delete all registered commands
+- `npm run del-com`: Delete all registered commands
 
 ## Future Idea
 
