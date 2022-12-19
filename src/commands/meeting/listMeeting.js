@@ -28,7 +28,7 @@ const data = new SlashCommandBuilder()
       .setRequired(false)
   );
 
-const execute = async function (interaction) {
+const execute = async function execute(interaction) {
   const guildId = interaction.guild.id;
 
   // Send choices for autocomplete back
@@ -42,31 +42,31 @@ const execute = async function (interaction) {
     const teamName = interaction.options.getString('team_name');
     const all = interaction.options.getBoolean('all');
     const meetings = [];
+    let fetchedMeetings = [];
     // If team_name is specified, look for meetings in the team
     if (teamName) {
       const team = await Team.findNameInGuild(teamName, guildId);
-      console.log('Team: ', team);
-      for (const meeting of team.meetings) {
-        meetings.push({
-          teamName: team.teamName,
-          title: meeting.title,
-          date: meeting.date,
-        });
-      }
+      fetchedMeetings = [teamName, ...team.meetings].flat();
     }
     // If team_name is not specified
     else {
-      // console.log(teams);
       const teams = await Team.inGuild(guildId);
-      for (const team of teams) {
-        for (const meeting of team.meetings) {
-          if (all || moment(meeting.date).isAfter())
-            meetings.push({
-              teamName: team.teamName,
-              title: meeting.title,
-              date: meeting.date,
-            });
-        }
+      fetchedMeetings = fetchedMeetings
+        .concat(teams.map(team => [team.teamName, ...team.meetings]))
+        .flat();
+    }
+
+    // Merge all meetings and filter
+    let curTeamName = '';
+    for (const meeting of fetchedMeetings) {
+      if (typeof meeting === typeof curTeamName) {
+        curTeamName = meeting;
+      } else if (all || moment(meeting.date).isAfter()) {
+        meetings.push({
+          teamName: curTeamName,
+          title: meeting.title,
+          date: meeting.date,
+        });
       }
     }
     console.log(meetings);

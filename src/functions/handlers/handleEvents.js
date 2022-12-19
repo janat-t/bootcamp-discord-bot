@@ -35,14 +35,15 @@ module.exports = client => {
             const filePath = path.join('../../events', folder, file);
             const event = require(filePath);
 
-            if (event.once)
+            if (event.once) {
               connection.once(event.name, (...args) =>
                 event.execute(...args, client)
               );
-            else
+            } else {
               connection.on(event.name, (...args) =>
                 event.execute(...args, client)
               );
+            }
           }
           break;
 

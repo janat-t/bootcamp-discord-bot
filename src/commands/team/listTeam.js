@@ -18,7 +18,7 @@ const data = new SlashCommandBuilder()
       .addChannelTypes(ChannelType.GuildText)
   );
 
-const execute = async function (interaction) {
+const execute = async function execute(interaction) {
   await interaction.deferReply({
     ephemeral: false,
   });

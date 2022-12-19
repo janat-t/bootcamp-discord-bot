@@ -22,7 +22,6 @@ for (const folder of functionFolders) {
 
   for (const file of functionFiles) {
     const filePath = path.join(functionsPath, folder, file);
-    // eslint-disable-next-line import/no-dynamic-require, global-require
     require(filePath)(client);
   }
 }

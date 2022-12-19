@@ -36,7 +36,7 @@ const data = new SlashCommandBuilder()
       .setRequired(true)
   );
 
-const execute = async function (interaction) {
+const execute = async function execute(interaction) {
   const guildId = interaction.guild.id;
 
   // Send choices for autocomplete back
