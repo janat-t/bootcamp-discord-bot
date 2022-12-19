@@ -4,7 +4,7 @@ Discord bot that will take care of your team meeting schedule on Discord for you
 
 ## Implemented Commands
 
-- **_Tools_**
+### Tools
   - `/ping`
     - Ping latency of the API
   - `/user`
@@ -13,12 +13,12 @@ Discord bot that will take care of your team meeting schedule on Discord for you
     - Provide information about current server
   - `/guild`
     - Store guild information into the database
-- **_Team_**
+### Team
   - `/new_team team_name [channel] [role]`
     - Create a new team on a channel and role (optional)
   - `/teams [channel]`
     - List all team on current guild or a channel
-- **_Meeting_**
+### Meeting
   - `/new_meeting team_name title date_time`
     - Create a new meeting associated with the team with name `team_name` with title of `title` at the time `date_time`
   - `/meetings [team_name]`
@@ -35,13 +35,23 @@ Discord bot that will take care of your team meeting schedule on Discord for you
 
 ## How to Run
 
-\*\*Create a file named `config.json` and put `token`, `databaseToken`, `clientId` and `guildId` inside.\*\*
-
 ### First time only
 
-Install `MongoDB` locally or create a database on MongoDB Atlas.
-Install node packages by running `npm install` or `npm i`.
-For convinience when developing, also install `nodemon` by running `npm i -g nodemon`
+1. Create a file named `config.json` and put `token`, `databaseToken`, `clientId` and `guildId` inside like so.
+   ```
+   {
+     "token": "your-bot-token",
+     "databaseToken": "mongodb://localhost:27017/?readPreference=primary&ssl=false&directConnection=true",
+     "clientId": "application-id",
+     "guildId": "guild-id",
+   }
+   ```
+
+2. Install `MongoDB` locally or create a database on MongoDB Atlas. You can install MongoDB easily with docker by running following command
+   ```
+   docker run -dp 27015:27017 --name mymongo mongo:latest
+   ```
+
 
 ### Scripts
 
