@@ -53,20 +53,32 @@ const teamSchema = new Schema(
   }
 );
 
-teamSchema.virtual('teamId').get(function () {
+teamSchema.virtual('teamId').get(function teamId() {
   return this._id;
 });
 
-teamSchema.statics.findId = function (teamId) {
+teamSchema.statics.findId = function findId(teamId) {
   return this.findOne({ _id: teamId });
 };
 
-teamSchema.statics.inGuild = function (guildId) {
+teamSchema.statics.inGuild = function inGuild(guildId) {
   return this.find({ 'guild.guildId': guildId });
 };
 
-teamSchema.statics.findNameInGuild = function (teamName, guildId) {
+teamSchema.statics.findNameInGuild = function findNameInGuild(
+  teamName,
+  guildId
+) {
   return this.findOne({ 'guild.guildId': guildId, teamName });
+};
+
+teamSchema.statics.getTeamNameRegex = function regexTeamName(regex, guildId) {
+  return this.find({
+    teamName: { $regex: regex },
+    'guild.guildId': guildId,
+  })
+    .select('teamName')
+    .sort('teamName');
 };
 
 // eslint-disable-next-line new-cap
