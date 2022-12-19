@@ -1,6 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable import/no-dynamic-require */
-/* eslint-disable global-require */
 const path = require('node:path');
 const fs = require('node:fs');
 const { connection } = require('mongoose');
