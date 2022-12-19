@@ -28,7 +28,7 @@ const data = new SlashCommandBuilder()
     option.setName('role').setDescription('Set the role of the team')
   );
 
-const execute = async function (interaction) {
+const execute = async function execute(interaction) {
   await interaction.deferReply({
     ephemeral: false,
   });

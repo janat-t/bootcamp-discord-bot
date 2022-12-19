@@ -6,7 +6,7 @@
   "extends": ["airbnb-base", "prettier", "plugin:node/recommended"],
   "plugins": ["prettier"],
   "rules": {
-    "func-names": "off",
+    "curly": "error",
     "global-require": "off",
     "import/no-dynamic-require": "off",
     "no-console": "off",
