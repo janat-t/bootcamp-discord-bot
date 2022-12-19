@@ -1,13 +1,14 @@
 const Team = require('../schemas/team');
 
-module.exports = async function (interaction, guildId, field) {
+module.exports = async function autocomplete(interaction, guildId, field) {
   if (field === 'teamName') {
     const choices = [];
     const teamName = interaction.options.getString('team_name').split('');
     // Get team list that matches team_name from database
-    const teams = await Team.inGuild(guildId)
-      .where('teamName')
-      .regex(`.*${teamName.join('.*')}`);
+    const teams = await Team.getTeamNameRegex(
+      `.*${teamName.join('.*')}`,
+      guildId
+    );
 
     // Create choices for autocomplete
     teams.map(team =>
